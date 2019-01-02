@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/artist'
 
-class PhotographTest < Minitest::Test
+class ArtistTest < Minitest::Test
   def test_it_exists
     attributes = {
       id: "2",
