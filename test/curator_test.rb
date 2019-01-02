@@ -346,4 +346,13 @@ class CuratorTest < Minitest::Test
     assert_instance_of Array, curator.photographs
     assert_instance_of Photograph, curator.photographs.first
   end
+
+  def test_it_can_load_artists_from_a_csv
+    curator = Curator.new
+
+    curator.load_artists('./data/artists.csv')
+
+    assert_instance_of Array, curator.artists
+    assert_instance_of Artist, curator.artists.first
+  end
 end
