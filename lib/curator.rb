@@ -22,6 +22,13 @@ class Curator
     @photographs << Photograph.new(photograph_info)
   end
 
+  def load_artists(file)
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
+      artist = Artist.new(row)
+      @artists << artist
+    end
+  end
+
   def add_artist(artist_info)
     @artists << Artist.new(artist_info)
   end
