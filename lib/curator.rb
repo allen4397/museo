@@ -47,4 +47,19 @@ class Curator
     end
     return artists.uniq
   end
+
+  def photographs_taken_by_artist_from(country)
+    artists_from_country = @artists.find_all do |artist|
+      artist.country == country
+    end
+    photos_by_artists_from_country = []
+    @photographs.each do |photograph|
+      artists_from_country.each do |artist|
+        if artist.id == photograph.artist_id
+          photos_by_artists_from_country << photograph
+        end
+      end
+    end
+    return photos_by_artists_from_country
+  end
 end
