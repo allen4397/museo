@@ -355,4 +355,14 @@ class CuratorTest < Minitest::Test
     assert_instance_of Array, curator.artists
     assert_instance_of Artist, curator.artists.first
   end
+
+  def test_it_can_find_photographs_taken_within_a_given_time_frame
+    curator = Curator.new
+    curator.load_photographs('./data/photographs.csv')
+    curator.load_artists('./data/artists.csv')
+
+    assert_instance_of Array, curator.photographs_taken_between(1950..1965)
+    assert_instance_of Photograph, curator.photographs_taken_between(1950..1965).first
+    assert_equal "1954", curator.photographs_taken_between(1950..1965).first.year
+  end
 end
