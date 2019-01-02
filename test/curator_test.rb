@@ -337,4 +337,13 @@ class CuratorTest < Minitest::Test
     assert_equal "Moonrise, Hernandez", curator.photographs_taken_by_artist_from("United States").first.name
     assert_equal [], curator.photographs_taken_by_artist_from("Argentina")
   end
+
+  def test_it_can_load_photographs_from_a_csv
+    curator = Curator.new
+
+    curator.load_photographs('./data/photographs.csv')
+
+    assert_instance_of Array, curator.photographs
+    assert_instance_of Photograph, curator.photographs.first
+  end
 end

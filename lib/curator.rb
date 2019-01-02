@@ -1,5 +1,6 @@
 require_relative 'photograph'
 require_relative 'artist'
+require 'CSV'
 
 class Curator
   attr_reader :artists,
@@ -8,6 +9,13 @@ class Curator
   def initialize
     @artists = []
     @photographs = []
+  end
+
+  def load_photographs(file)
+    CSV.foreach(file, headers: true, header_converters: :symbol) do |row|
+      photo = Photograph.new(row)
+      @photographs << photo
+    end
   end
 
   def add_photograph(photograph_info)
