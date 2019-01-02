@@ -365,4 +365,18 @@ class CuratorTest < Minitest::Test
     assert_instance_of Photograph, curator.photographs_taken_between(1950..1965).first
     assert_equal "1954", curator.photographs_taken_between(1950..1965).first.year
   end
+
+  def test_it_find_artists_photographs_by_age
+    curator = Curator.new
+    curator.load_photographs('./data/photographs.csv')
+    curator.load_artists('./data/artists.csv')
+    diane_arbus = curator.find_artist_by_id("3")
+
+    expected = {
+      44=>"Identical Twins, Roselle, New Jersey",
+      39=>"Child with Toy Hand Grenade in Central Park"
+    }
+
+    assert_equal expected, curator.artists_photographs_by_age(diane_arbus)
+  end
 end
