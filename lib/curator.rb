@@ -35,4 +35,16 @@ class Curator
       photograph.artist_id == artist.id
     end
   end
+
+  def find_artists_with_multiple_photographs
+    artists = []
+    @photographs.each do |photograph|
+      @photographs.each do |photo|
+        if photo.artist_id == photograph.artist_id && photo != photograph
+          artists << find_artist_by_id(photo.artist_id)
+        end
+      end
+    end
+    return artists.uniq
+  end
 end
