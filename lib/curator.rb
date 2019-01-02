@@ -83,4 +83,15 @@ class Curator
       range.include?(photograph.year.to_i)
     end
   end
+
+  def artists_photographs_by_age(artist)
+    artists_photos_by_age = {}
+    @photographs.each do |photograph|
+      if photograph.artist_id == artist.id
+        age = photograph.year.to_i - artist.born.to_i
+        artists_photos_by_age[age] = photograph.name
+      end
+    end
+    return artists_photos_by_age
+  end
 end
